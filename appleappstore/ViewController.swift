@@ -26,11 +26,11 @@ class FeaturedAppsController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(view.frame.width, 150)
+        return CGSizeMake(view.frame.width, 230)
     }
 
 }
