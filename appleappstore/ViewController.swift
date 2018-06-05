@@ -11,9 +11,13 @@ import UIKit
 class FeaturedAppsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
+    
+    var appCategories: [AppCategory]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        appCategories = AppCategory.sampleAppCategories()
         
         collectionView?.backgroundColor = UIColor.whiteColor()
         
@@ -22,11 +26,16 @@ class FeaturedAppsController: UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath) as! CategoryCell
+        
+        cell.appCategory = appCategories?[indexPath.item]
         return cell
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if let count = appCategories?.count {
+            return count
+        }
+        return 0
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
