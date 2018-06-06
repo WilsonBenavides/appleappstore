@@ -110,6 +110,18 @@ class AppCell: UICollectionViewCell {
         didSet {
             if let name = app?.name {
                 nameLabel.text = name
+                
+                let rect = NSString(string: name).boundingRectWithSize(CGSizeMake(frame.width, 1000), options: NSStringDrawingOptions.UsesFontLeading.union(NSStringDrawingOptions.UsesLineFragmentOrigin), attributes: [NSFontAttributeName: UIFont.systemFontOfSize(14)], context: nil)
+                
+                if rect.height > 20 {
+                    categoryLabel.frame = CGRectMake(0, frame.width + 38, frame.width, 20)
+                    priceLabel.frame = CGRectMake(0, frame.width + 56, frame.width, 20)
+                } else {
+                    categoryLabel.frame = CGRectMake(0, frame.width + 22, frame.width, 20)
+                    priceLabel.frame = CGRectMake(0, frame.width + 40, frame.width, 20)
+                }
+                nameLabel.frame = CGRectMake(0, frame.width + 5, frame.width, 40)
+                nameLabel.sizeToFit()
             }
             
             categoryLabel.text = app?.category
