@@ -16,8 +16,13 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
             if let name = appCategory?.name {
                 nameLabel.text = name
             }
+            
+            appsCollectionView.reloadData()
+            
         }
     }
+    
+    private let cellId = "appCellId"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,8 +33,6 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Best New Apps"
@@ -38,12 +41,9 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
         return label
     }()
     
-    
     let appsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        
         layout.scrollDirection = .Horizontal
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         collectionView.backgroundColor = UIColor.clearColor()
@@ -54,12 +54,10 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
     
     let dividerLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
+        view.backgroundColor = UIColor(white: 0.4, alpha: 0.4)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    private let cellId = "appCellId"
     
     func setupViews() {
         backgroundColor = UIColor.clearColor()
@@ -80,6 +78,7 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": appsCollectionView]))
         
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[nameLabel(30)][v0][v1(0.5)]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": appsCollectionView, "v1": dividerLineView, "nameLabel": nameLabel]))
+        
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -102,6 +101,7 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 14, 0, 14)
     }
+    
 }
 
 class AppCell: UICollectionViewCell {
@@ -120,21 +120,24 @@ class AppCell: UICollectionViewCell {
                     categoryLabel.frame = CGRectMake(0, frame.width + 22, frame.width, 20)
                     priceLabel.frame = CGRectMake(0, frame.width + 40, frame.width, 20)
                 }
+                
                 nameLabel.frame = CGRectMake(0, frame.width + 5, frame.width, 40)
                 nameLabel.sizeToFit()
+                
             }
             
             categoryLabel.text = app?.category
             
             if let price = app?.price {
                 priceLabel.text = "$\(price)"
-            }else {
+            } else {
                 priceLabel.text = ""
             }
             
             if let imageName = app?.imageName {
                 imageView.image = UIImage(named: imageName)
             }
+            
         }
     }
     
@@ -157,8 +160,8 @@ class AppCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Disney Builld It: Frozen"
-        label.font = UIFont.systemFontOfSize(13)
+        label.text = "Disney Build It: Frozen"
+        label.font = UIFont.systemFontOfSize(14)
         label.numberOfLines = 2
         return label
     }()
@@ -180,7 +183,6 @@ class AppCell: UICollectionViewCell {
     }()
     
     func setupViews() {
-        
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(categoryLabel)
@@ -191,4 +193,5 @@ class AppCell: UICollectionViewCell {
         categoryLabel.frame = CGRectMake(0, frame.width + 38, frame.width, 20)
         priceLabel.frame = CGRectMake(0, frame.width + 56, frame.width, 20)
     }
+    
 }
